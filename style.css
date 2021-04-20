@@ -1,0 +1,31 @@
+body{
+    background-color:rgb(32, 85, 32);
+}
+.form{
+    background-color:rgba(229, 229, 143, 0.438);
+        padding-top: 30px;
+        padding-right: 30px;
+        padding-bottom: 30px;
+        padding-left: 30px;
+      
+}
+.my-4{
+    background-color:rgba(229, 229, 143, 0.438);
+        padding-top: 30px;
+        padding-right: 30px;
+        padding-bottom: 30px;
+        padding-left: 30px;
+      
+}
+.class{
+  
+        display:ruby;
+        margin-left:30px;
+        margin-right: 30px;
+        align-items: center ;
+    
+}
+.navbar{
+    background-color:rgba(0, 0, 0, 0.87);
+    text-decoration-color: papayawhip;
+}

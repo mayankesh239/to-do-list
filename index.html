@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <title>TO-DO List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav id="navbar-example2" class="navbar">
+    <a class="navbar-brand" href="#">TO-DO List</a>
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link" href="#one">New Task</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#items">Task Manager</a>
+      </li>
+    </ul>
+  </nav>
+  <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" tabindex="0">
+  </div>
+  <p style="text-align:center;"><img src="to-do_list.png" alt="to do list"></p>
+  <div class="container my-4">
+    <div class="form" id="one">
+      <h2 class="text-center" >TO-DO List</h2>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">Your e-mail address isn't shared with anyone.</small>
+      </div>
+      <div class="form-group">
+        <label for="title">Task</label>
+        <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">Add the task to your list</small>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" rows="3"></textarea>
+        <small id="emailHelp" class="form-text text-muted">Write the description of your task</small>
+      </div>
+      <div class="form-group">
+        <label for="title">Due Date</label>
+        <input type="text" class="form-control" id="due_date" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">Write the due date to accomplish the task.</small>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">I want to add this task to my list.</label>
+      </div>
+      <button id="add" class="btn btn-primary">Add to list</button>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-calendar"
+      viewBox="0 0 16 16">
+      <path
+        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+    </svg>
+    <div id="items" class="my-4">
+      <div class="head">
+        <h1>Task Manager</h1>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">S.No.</th>
+            <th scope="col">Task</th>
+            <th scope="col">Description</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr>
+            <th scope="row">1</th>
+            <td>Do some programming</td>
+            <td>You are a programmer, you should code</td>
+            <td><button class="btn btn-sm btn-primary">Accompolished</button></td>
+          </tr>
+
+        </tbody>
+      </table>
+      <button id="clear" class="btn btn-primary" onclick="clearStorage()">Clear list</button><br><br>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script>
+    function getAndUpdate() {
+      console.log("Save the changes");
+      tit = document.getElementById('title').value;
+      desc = document.getElementById('description').value;
+      dd = document.getElementById('due_date').value;
+      if (localStorage.getItem('itemsJson') == null) {
+        itemJsonArray = [];
+        itemJsonArray.push([tit, desc, dd]);
+        localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
+      }
+      else {
+        itemJsonArrayStr = localStorage.getItem('itemsJson')
+        itemJsonArray = JSON.parse(itemJsonArrayStr);
+        itemJsonArray.push([tit, desc, dd]);
+        localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
+      }
+      update();
+    }
+
+    function update() {
+      if (localStorage.getItem('itemsJson') == null) {
+        itemJsonArray = [];
+        localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
+      }
+      else {
+        itemJsonArrayStr = localStorage.getItem('itemsJson')
+        itemJsonArray = JSON.parse(itemJsonArrayStr);
+      }
+      // Populate the table
+      let tableBody = document.getElementById("tableBody");
+      let str = "";
+      itemJsonArray.forEach((element, index) => {
+        str += `
+                    <tr>
+                    <th scope="row">${index + 1}</th>
+                    <td>${element[0]}</td>
+                    <td>${element[1]}</td> 
+                    <td>${element[2]}</td> 
+                    
+                    <td><button class="btn btn-sm btn-primary" onclick="deleted(${index})">Accompolished</button></td> 
+                    </tr>`;
+      });
+      tableBody.innerHTML = str;
+    }
+    add = document.getElementById("add");
+    add.addEventListener("click", getAndUpdate);
+    update();
+    function deleted(itemIndex) {
+      console.log("Accompolished", itemIndex);
+      itemJsonArrayStr = localStorage.getItem('itemsJson')
+      itemJsonArray = JSON.parse(itemJsonArrayStr);
+      itemJsonArray.splice(itemIndex, 1);
+      localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+      update();
+
+    }
+    function clearStorage() {
+      if (confirm("Do you really want to clear the list?")) {
+        console.log('Clearing the storage')
+        localStorage.clear();
+        update()
+      }
+    }
+  </script>
+
+</body>
+
+</html>
